@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Records</title>
+
+  <!-- Bootstrap styling to add responsive layout, buttons, table styling, and spacing utilities -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<!-- Using Bootstrap to apply a Extremely light Blue  -->
+<body class="bg-primary-subtle">
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Vinyl Record Collection</h1>
+    <a class="btn btn-primary" href="/add-record">Add record</a>
+  </div>
+
+  <div th:if="${#lists.isEmpty(records)}" class="alert alert-info">
+    You currently have no records in your collection. Click "Add record" to get started.
+  </div>
+
+  <table th:if="${!#lists.isEmpty(records)}" class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Year Released</th>
+      <th>View More</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${records}">
+      <td th:text="${r.title}"></td>
+      <td th:text="${r.artist}"></td>
+      <td th:text="${r.yearReleased}"></td>
+      <td><a class="btn btn-sm btn-outline-secondary" th:href="@{'/records/' + ${r.id}}">View More</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>

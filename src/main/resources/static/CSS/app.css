@@ -1,0 +1,15 @@
+/* Light blue background applied to the pages */
+body {
+    background-color: #eaf4ff; /* soft light blue */
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Stack validation messages nicely */
+.text-danger > div {
+    margin-top: 4px;
+}
+
+/* Optional: soften card edges slightly */
+.card {
+    border-radius: 8px;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Add Record</title>
+
+  <!-- Bootstrap styling for more responsive layout, spacing, form controls, and validation styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+
+<!-- Using Bootstrap to apply a Extremely light Blue  -->
+<body class="bg-primary-subtle">
+
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Add Record</h1>
+    <a class="btn btn-secondary" th:href="@{/records}">Back</a>
+  </div>
+
+  <form th:action="@{/add-record}"
+        th:object="${record}"
+        method="post"
+        class="card shadow-sm p-4">
+
+    <!-- TITLE -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input id="title" class="form-control" th:field="*{title}"/>
+
+      <div th:if="${#fields.hasErrors('title')}" class="text-danger">
+        <div th:each="err : ${#fields.errors('title')}"
+             th:text="${err}"></div>
+      </div>
+    </div>
+
+    <!-- ARTIST -->
+    <div class="mb-3">
+      <label for="artist" class="form-label">Artist</label>
+      <input id="artist" class="form-control" th:field="*{artist}"/>
+
+      <div th:if="${#fields.hasErrors('artist')}" class="text-danger">
+        <div th:each="err : ${#fields.errors('artist')}"
+             th:text="${err}"></div>
+      </div>
+    </div>
+
+    <!-- LABEL -->
+    <div class="mb-3">
+      <label for="label" class="form-label">Label</label>
+      <input id="label" class="form-control" th:field="*{label}"/>
+
+      <div th:if="${#fields.hasErrors('label')}" class="text-danger">
+        <div th:each="err : ${#fields.errors('label')}"
+             th:text="${err}"></div>
+      </div>
+    </div>
+
+    <!-- YEAR RELEASED + TRACKS -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="yearReleased" class="form-label">Year Released</label>
+        <input id="yearReleased" type="number"
+               class="form-control"
+               th:field="*{yearReleased}"/>
+
+        <div th:if="${#fields.hasErrors('yearReleased')}" class="text-danger">
+          <div th:each="err : ${#fields.errors('yearReleased')}"
+               th:text="${err}"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="numberOfTracks" class="form-label">Number of Tracks</label>
+        <input id="numberOfTracks" type="number"
+               class="form-control"
+               th:field="*{numberOfTracks}"/>
+
+        <div th:if="${#fields.hasErrors('numberOfTracks')}" class="text-danger">
+          <div th:each="err : ${#fields.errors('numberOfTracks')}"
+               th:text="${err}"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIZE -->
+    <div class="mb-3">
+      <label for="size" class="form-label">Size</label>
+      <select id="size" class="form-select" th:field="*{size}">
+        <option value="">-- Select size --</option>
+        <option value="SEVEN_INCH">7"</option>
+        <option value="TEN_INCH">10"</option>
+        <option value="TWELVE_INCH">12"</option>
+      </select>
+
+      <div th:if="${#fields.hasErrors('size')}" class="text-danger">
+        <div th:each="err : ${#fields.errors('size')}"
+             th:text="${err}"></div>
+      </div>
+    </div>
+
+    <!-- DAMAGED -->
+    <div class="form-check mb-3">
+      <input id="damaged" class="form-check-input"
+             type="checkbox"
+             th:field="*{damaged}"/>
+      <label for="damaged" class="form-check-label">Damaged</label>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-success">Submit</button>
+      <a class="btn btn-outline-secondary" th:href="@{/records}">Cancel</a>
+    </div>
+  </form>
+
+  <!-- Extra credit: shows how many records will exist in the collection after submission -->
+  <p class="mt-3 text-muted">
+    This will increase your collection size to
+    <strong th:text="${projectedCount}">0</strong> records.
+  </p>
+
+</div>
+</body>
+</html>
